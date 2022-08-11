@@ -32,6 +32,9 @@ function App() {
         {loggedIn ? <div className="App">
           <h2>{user} logged In</h2>    
         
+        <button>Update Profile</button>
+        <br></br>
+        <button>Delete Profile</button>
         <br></br>
         <button onClick = {(event) => setDisplay(!displayImages)}>Activity Feed</button>
         {displayImages &&
@@ -46,7 +49,7 @@ function App() {
             )
           })}
         </div>
-        : <p>sign up or login to access your feed</p>}
+        : <p>sign up or login to access your account</p>}
      
     </div>
   );
