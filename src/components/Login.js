@@ -2,8 +2,8 @@ import { useState } from "react";
 import { login } from "../utils";
 
 export const Login = ({setUser, setLoggedIn}) => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
 
     const loginHandler = async (event) => {
         event.preventDefault()

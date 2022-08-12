@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react"
 import SignUp from "./components/SignUp.js"
+import ProfilePage from "./components/ProfilePage.js";
 import {Login} from "./components/Login.js"
 import './App.css';
 
@@ -23,18 +24,11 @@ function App() {
 
   return (
     <div className="App">
-      <h2>Sign up here:</h2>
-      <br></br>
-      <SignUp setUser = {setUser} setLoggedIn = {setLoggedIn}/>
-      <br></br>
-      <h2>Or</h2>
-      <Login setUser = {setUser} setLoggedIn = {setLoggedIn}/>
+      
         {loggedIn ? <div className="App">
           <h2>{user} logged In</h2>    
         
-        <button>Update Profile</button>
-        <br></br>
-        <button>Delete Profile</button>
+        <ProfilePage/>
         <br></br>
         <button onClick = {(event) => setDisplay(!displayImages)}>Activity Feed</button>
         {displayImages &&
@@ -49,7 +43,14 @@ function App() {
             )
           })}
         </div>
-        : <p>sign up or login to access your account</p>}
+        : <div><p>sign up or login to access your account</p>
+        <h2>Sign up here:</h2>
+      <br></br>
+      <SignUp setUser = {setUser} setLoggedIn = {setLoggedIn}/>
+      <br></br>
+      <h2>Or</h2>
+      <Login setUser = {setUser} setLoggedIn = {setLoggedIn}/></div>
+      }
      
     </div>
   );

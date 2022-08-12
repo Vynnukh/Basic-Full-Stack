@@ -27,14 +27,28 @@ export const login = async (email, password, setUser, setLoggedIn) => {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
-                email,
-               password
+                "email":email,
+               "password":password
             })
         })
         const data = await response.json()
-        setUser({email: data.user.email, password: data.user.password})
+        console.log(data.user.email)
+        setUser( data.user.email, data.user.password)
         setLoggedIn(true)
     } catch (error) {
+        console.log(error)
+    }
+}
+
+export const logout = async (token) => {
+    try {
+        const response = await fetch("http://localhost:5000/users/logout", {
+            method: "GET",
+            headers: {Authorization: token}
+        })
+        const data = await response.json()
+        
+    } catch(error) {
         console.log(error)
     }
 }
