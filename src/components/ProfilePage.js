@@ -25,8 +25,7 @@ const ProfilePage = ({user, setUser, loggedIn, setLoggedIn}) => {
         {loggedIn ? <div className="App">
           <h2>{user} logged In</h2>    
         
-        <ProfilePage/>
-        <br></br>
+        
         <button onClick = {(event) => setDisplay(!displayImages)}>Activity Feed</button>
         {displayImages &&
           imgs.map((item, index) => {

@@ -25,7 +25,7 @@ function App() {
           <Link className="navLinks1" to="/">Home</Link>
         </div>
         <div className="navLinks">
-          <Link className="navLinks1" to="/read">Display Users</Link>
+          <Link className="navLinks1" to="/read">View Members</Link>
         </div>
         <div className="navLinks">
           <Link className="navLinks1" to="/update">Update Profile</Link>
@@ -34,15 +34,15 @@ function App() {
           <Link className="navLinks1" to="/delete">Delete Account</Link>
         </div>
         <div className="navLinks">
-          <Link className="navLinks1" to="/logout">Logout</Link>
+          <Link className="navLinks1" to="/logout">Log Out</Link>
         </div>
       </nav>
       <Routes>
         <Route path="/" element = {<ProfilePage user = {user} setUser = {setUser} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} />}></Route>
-        <Route path="/read" element = {<Read/>}></Route>
-        <Route path="/update" element = {<Update/>}></Route>
-        <Route path="/delete" element = {<Delete/>}></Route>
-        <Route path="/logout" element = {<Logout/>}></Route>
+        <Route path="/read" element = {<Read loggedIn={loggedIn} setLoggedIn = {setLoggedIn}/>}></Route>
+        <Route path="/update" element = {<Update loggedIn={loggedIn} setLoggedIn = {setLoggedIn}/>}></Route>
+        <Route path="/delete" element = {<Delete loggedIn={loggedIn} setLoggedIn = {setLoggedIn}/>}></Route>
+        <Route path="/logout" element = {<Logout loggedIn={loggedIn} setLoggedIn = {setLoggedIn}/>}></Route>
       </Routes>
       </BrowserRouter>
     </div>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { update } from "../utils";
 
-const Update = ({setUser}) => {
+const Update = ({setUser, loggedIn, setLoggedIn}) => {
     const [username, setUsername] = useState()
     const [firstname, setFirstName] = useState()
     const [lastname, setLastName] = useState()
@@ -14,6 +14,7 @@ const Update = ({setUser}) => {
     }
 
     return (
+        <div>{loggedIn ?
         <form onSubmit={updateHandler}>
             <label>Username:
                     <input onChange={(event) => setUsername(event.target.value)}/>
@@ -36,7 +37,9 @@ const Update = ({setUser}) => {
             <br></br>
             <button type = "submit">Update Profile</button>
             </label>
-        </form>
+        </form>:
+        <h2>You must be logged in to update your profile.</h2>}
+        </div>
     )
 }
 

@@ -32,7 +32,6 @@ export const login = async (email, password, setUser, setLoggedIn) => {
             })
         })
         const data = await response.json()
-        console.log(data.user.email)
         setUser( data.user.email, data.user.password)
         setLoggedIn(true)
     } catch (error) {
@@ -40,14 +39,29 @@ export const login = async (email, password, setUser, setLoggedIn) => {
     }
 }
 
-export const logout = async (token) => {
+export const logout = async (token, setLoggedIn) => {
     try {
         const response = await fetch("http://localhost:5000/users/logout", {
             method: "GET",
             headers: {Authorization: token}
         })
         const data = await response.json()
-        
+        setLoggedIn(false)
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+export const readUsers = async () => {
+    try {
+        const response = await fetch("http://localhost:5000/users/finduser", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"}
+        })
+
+        const data = await response.json()
+
+
     } catch(error) {
         console.log(error)
     }
@@ -57,7 +71,7 @@ export const update = async (username, firstname, lastname, email, password, set
     try {
         const response = await fetch("http://localhost:5000/users/myProfile",
         { method: "PATCH",
-    hearders: {"Content-Type": "application/json"},
+    headers: {"Content-Type": "application/json"},
     body: JSON.stringify
         ({"userName": username,
         "firstName": firstname,
@@ -67,7 +81,25 @@ export const update = async (username, firstname, lastname, email, password, set
     })
 })
         const data = await response.json()
-        setUser({username: data.user.username, firstname: data.user.firstname, lastname: data.user.lastname, email: data.user.email, password: data.user.password})
+        setUser(data.updatedUser.username, data.updatedUser.firstname, data.updatedUser.lastname,  data.updatedUser.email,  data.updatedUser.password)
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+export const deleteUser = async (username, password, setLoggedIn) => {
+    try {
+        const response = await fetch("http://localhost:5000/users/myProfile",
+        { method: "DELETE",
+       headers: {"content-Type": "application/json"},
+    body: JSON.stringify
+({"userName": username,
+    "password": password
+
+    })
+})
+    const data = await response.json()
+    // setLoggedIn(false)
     } catch(error) {
         console.log(error)
     }
