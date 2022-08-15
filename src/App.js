@@ -1,57 +1,50 @@
 import {useState, useEffect} from "react"
-import SignUp from "./components/SignUp.js"
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom"
 import ProfilePage from "./components/ProfilePage.js";
-import {Login} from "./components/Login.js"
+import Update from "./components/Update.js";
+import {Logout} from "./components/Logout.js"
+import {Delete} from "./components/Delete.js"
+import {Read} from "./components/Read.js"
 import './App.css';
+
 
 function App() {
 
   const [user, setUser] = useState()
   const [loggedIn, setLoggedIn] = useState(false)
-  const [imgs, setImgs] = useState([])
-  const [displayImages, setDisplay] = useState(false)
-
-    const fetchImg = async () => {
-      const response = await fetch("https://picsum.photos/v2/list")
-      const data = await response.json()
-      setImgs(data)
-    }
-
-  useEffect(() => {
-      fetchImg()
-      console.log()
-    }, [])
+  
 
   return (
     <div className="App">
-      
-        {loggedIn ? <div className="App">
-          <h2>{user} logged In</h2>    
-        
-        <ProfilePage/>
-        <br></br>
-        <button onClick = {(event) => setDisplay(!displayImages)}>Activity Feed</button>
-        {displayImages &&
-          imgs.map((item, index) => {
-            return (
-              <div className="imageIndex">
-              <div>
-                <h2>{item.author}</h2>
-                <img src = {item.download_url} alt = "from a Random API"/>
-                </div>
-                </div>
-            )
-          })}
+      <BrowserRouter>
+      <nav>
+        <div>
+          {/* User Logged in Status */}
         </div>
-        : <div><p>sign up or login to access your account</p>
-        <h2>Sign up here:</h2>
-      <br></br>
-      <SignUp setUser = {setUser} setLoggedIn = {setLoggedIn}/>
-      <br></br>
-      <h2>Or</h2>
-      <Login setUser = {setUser} setLoggedIn = {setLoggedIn}/></div>
-      }
-     
+        <div className="navLinks">
+          <Link className="navLinks1" to="/">Home</Link>
+        </div>
+        <div className="navLinks">
+          <Link className="navLinks1" to="/read">Display Users</Link>
+        </div>
+        <div className="navLinks">
+          <Link className="navLinks1" to="/update">Update Profile</Link>
+        </div>
+        <div className="navLinks">
+          <Link className="navLinks1" to="/delete">Delete Account</Link>
+        </div>
+        <div className="navLinks">
+          <Link className="navLinks1" to="/logout">Logout</Link>
+        </div>
+      </nav>
+      <Routes>
+        <Route path="/" element = {<ProfilePage user = {user} setUser = {setUser} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} />}></Route>
+        <Route path="/read" element = {<Read/>}></Route>
+        <Route path="/update" element = {<Update/>}></Route>
+        <Route path="/delete" element = {<Delete/>}></Route>
+        <Route path="/logout" element = {<Logout/>}></Route>
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }
